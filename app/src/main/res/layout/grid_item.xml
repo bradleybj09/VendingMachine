@@ -17,7 +17,7 @@
                 android:id="@+id/textview_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{product.name"
+                android:text="@{product.name}"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textAlignment="center"
                 android:ellipsize="end"
@@ -29,11 +29,18 @@
                 android:id="@+id/textview_product_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{product.location"
+                android:text="@{product.location}"
                 app:layout_constraintTop_toBottomOf="@id/textview_product_name"
                 android:textAlignment="center"
                 android:maxLines="1"
                 android:padding="4dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{product.count == 0 ? "SOLD OUT" : Integer.toString(product.count)}'
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/textview_product_location"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
