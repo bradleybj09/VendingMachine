@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+                name="product"
+                type="com.example.vendingmachine.Product"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/textview_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{product.name"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAlignment="center"
+                android:ellipsize="end"
+                android:minLines="2"
+                android:maxLines="2"
+                android:padding="4dp"/>
+
+        <TextView
+                android:id="@+id/textview_product_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{product.location"
+                app:layout_constraintTop_toBottomOf="@id/textview_product_name"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:padding="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
