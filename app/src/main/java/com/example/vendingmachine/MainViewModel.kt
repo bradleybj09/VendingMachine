@@ -39,4 +39,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun updateBalance() {
         balanceString.value = "$%.2f".format(balance)
     }
+
+    fun endTransaction() {
+        makeChange()
+        balance = 0.0
+        updateBalance()
+    }
+
+    private fun makeChange() : Array<Int> {
+        val quarters = (balance * 100).toInt() % 25
+        val dimes = (balance * 100).toInt() / 25 % 10
+        val nickels = (balance * 100).toInt() / 25 / 10 % 5
+        return arrayOf(quarters, dimes, nickels)
+    }
 }
