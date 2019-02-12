@@ -38,7 +38,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text='@{product.count == 0 ? "SOLD OUT" : Integer.toString(product.count)}'
+                android:text='@{safeUnbox(product.count) == 0 ? "SOLD OUT" : Integer.toString(safeUnbox(product.count))}'
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@id/textview_product_location"/>
 

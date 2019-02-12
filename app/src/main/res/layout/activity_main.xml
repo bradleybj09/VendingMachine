@@ -19,9 +19,77 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_product_grid"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/textview_balance"
+                app:layout_constraintVertical_weight="1"
                 tools:listItem="@layout.grid_item"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/textview_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.balanceString}"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/recyclerview_product_grid"
+                app:layout_constraintBottom_toTopOf="@id/button_change"/>
+
+        <Button
+                android:id="@+id/button_change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get change"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/textview_balance"
+                app:layout_constraintBottom_toTopOf="@id/button_bar"/>
+
+        <LinearLayout
+                android:id="@+id/button_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/button_change"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="horizontal"
+                style="?android:attr/buttonBarStyle">
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="Add $1"
+                    android:onClick="@{() -> viewModel.addFunds(1)}"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="Add $2"
+                    android:onClick="@{() -> viewModel.addFunds(2)}"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="Add $5"
+                    android:onClick="@{() -> viewModel.addFunds(5)}"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="Add $10"
+                    android:onClick="@{() -> viewModel.addFunds(10)}"
+                    style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,16 +16,16 @@ class MainActivity : AppCompatActivity(), ProductGridAdapter.OnItemClickListener
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerviewProductGrid.layoutManager = GridLayoutManager(this, 4)
-        adapter = ProductGridAdapter(arrayListOf(), this)
+        adapter = ProductGridAdapter(arrayListOf(), this, this)
         binding.recyclerviewProductGrid.adapter = adapter
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.run()
         adapter.replaceData(viewModel.products)
     }
 
     override fun onItemClick(position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        viewModel.purchaseProduct(position)
     }
 }
