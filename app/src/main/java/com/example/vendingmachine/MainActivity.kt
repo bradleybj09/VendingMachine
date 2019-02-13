@@ -1,8 +1,10 @@
 package com.example.vendingmachine
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.vendingmachine.databinding.ActivityMainBinding
@@ -23,6 +25,19 @@ class MainActivity : AppCompatActivity(), ProductGridAdapter.OnItemClickListener
         binding.recyclerviewProductGrid.adapter = adapter
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         adapter.replaceData(viewModel.products)
+
+        //observe on viewModel events to make toasts
+        viewModel.makeNoise.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.showChange.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onItemClick(position: Int) {

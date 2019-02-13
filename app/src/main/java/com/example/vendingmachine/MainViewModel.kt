@@ -2,6 +2,7 @@ package com.example.vendingmachine
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 
@@ -36,6 +37,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         products[index].decrement()
         balance -= products[index].price.toDouble()
         updateBalance()
+        _makeNoise.value = Event(products[index].noise)
     }
 
     private fun updateBalance() {
@@ -43,15 +45,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun endTransaction() {
-        makeChange()
+        _showChange.value = Event(makeChange())
         balance = 0.0
         updateBalance()
     }
 
-    private fun makeChange() : Array<Int> {
-        val quarters = (balance * 100).toInt() % 25
-        val dimes = (balance * 100).toInt() / 25 % 10
-        val nickels = (balance * 100).toInt() / 25 / 10 % 5
-        return arrayOf(quarters, dimes, nickels)
+    private fun makeChange() : String {
+        val quarters = (balance * 100).toInt() / 25
+        val dimes = (balance * 100).toInt() % 25 / 10
+        val nickels = (balance * 100).toInt() % 25 % 10 / 5
+        return "Change - Quarters: $quarters - Dimes: $dimes - Nickels: $nickels"
     }
+
+    //use private event to fire toasts from input
+
+    //change
+    private val _showChange = MutableLiveData<Event<String>>()
+    val showChange : LiveData<Event<String>>
+        get() = _showChange
+
+    //noise
+    private val _makeNoise = MutableLiveData<Event<String>>()
+    val makeNoise : LiveData<Event<String>>
+        get() = _makeNoise
 }
