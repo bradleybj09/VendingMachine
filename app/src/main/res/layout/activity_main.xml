@@ -13,17 +13,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="0dp"
             tools:context="com.example.vendingmachine.MainActivity">
 
 
         <androidx.recyclerview.widget.RecyclerView
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/recyclerview_product_grid"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/textview_balance"
-                app:layout_constraintVertical_weight="1"
-                tools:listItem="@layout.grid_item"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                tools:listItem="@layout.grid_item"/>
 
         <TextView
                 android:id="@+id/textview_balance"
@@ -31,24 +31,13 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.balanceString}"
                 android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/recyclerview_product_grid"
-                app:layout_constraintBottom_toTopOf="@id/button_change"/>
-
-        <Button
-                android:id="@+id/button_change"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Get change"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/textview_balance"
                 app:layout_constraintBottom_toTopOf="@id/button_bar"/>
 
         <LinearLayout
                 android:id="@+id/button_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/button_change"
-                app:layout_constraintBottom_toTopOf="@id/button_end"
+                app:layout_constraintBottom_toTopOf="@id/button_change"
                 android:orientation="horizontal"
                 style="?android:attr/buttonBarStyle">
 
@@ -56,6 +45,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
                     android:textAlignment="center"
                     android:text="Add $1"
                     android:onClick="@{() -> viewModel.addFunds(1)}"
@@ -65,6 +56,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
                     android:textAlignment="center"
                     android:text="Add $2"
                     android:onClick="@{() -> viewModel.addFunds(2)}"
@@ -74,6 +67,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
                     android:textAlignment="center"
                     android:text="Add $5"
                     android:onClick="@{() -> viewModel.addFunds(5)}"
@@ -83,11 +78,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
                     android:textAlignment="center"
                     android:text="Add $10"
                     android:onClick="@{() -> viewModel.addFunds(10)}"
                     style="?android:attr/buttonBarButtonStyle"/>
         </LinearLayout>
+
+        <Button
+                android:id="@+id/button_change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get change"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/button_end"/>
+
         <Button
                 android:id="@+id/button_end"
                 android:layout_width="match_parent"

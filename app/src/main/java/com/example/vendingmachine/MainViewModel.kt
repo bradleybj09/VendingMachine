@@ -5,15 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
 
+
+
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val products: ArrayList<Product> = ArrayList()
+    var products: List<Product> = ArrayList()
     var balance = 0.0
     var balanceString = MutableLiveData<String>()
 
     init {
-        products.add(Drink("A1","Coke","1.00"))
-        products.add(Drink("A2", "Pepsi", "1.50"))
+        val model = Model()
+        products = model.makeAndAddProduct(Util.setupArray)
         updateBalance()
     }
 
